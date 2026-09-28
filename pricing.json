@@ -1,0 +1,14 @@
+{
+  "_note": "DeepSeek 价格与优惠时段配置。若官方调整，改这里即可，页面和宠物会自动跟着变。",
+  "offPeak": {
+    "utcStart": "16:30",
+    "utcEnd": "00:30",
+    "label": "优惠时段",
+    "labelStandard": "标准时段",
+    "note": "北京时间每天 00:30 - 08:30 为优惠时段（UTC 16:30 - 00:30）。"
+  },
+  "models": [
+    { "id": "deepseek-chat", "name": "DeepSeek-V3.2 (chat)", "offPeakPct": 50 },
+    { "id": "deepseek-reasoner", "name": "DeepSeek-V3.2 (reasoner)", "offPeakPct": 75 }
+  ]
+}

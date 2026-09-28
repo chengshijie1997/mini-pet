@@ -1,0 +1,204 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-soft: #1c2430;
+  --line: #2a3442;
+  --text: #e6edf3;
+  --muted: #8b98a8;
+  --good: #3fd0a0;
+  --warn: #f0b429;
+  --bad: #f4696b;
+  --brand: #4d8dff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 16px 40px;
+  background: radial-gradient(1200px 600px at 20% -10%, #1b2b45 0%, var(--bg) 60%);
+  color: var(--text);
+  font: 14px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.mini {
+  width: 360px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1b2330, #141a23);
+  box-shadow: 0 8px 24px #0006;
+}
+
+.bar__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bad);
+  box-shadow: 0 0 0 4px #f4696b22;
+}
+
+.bar__dot[data-state="online"] { background: var(--good); box-shadow: 0 0 0 4px #3fd0a022; }
+.bar__dot[data-state="stale"] { background: var(--warn); box-shadow: 0 0 0 4px #f0b42922; }
+
+.bar__title { font-weight: 700; letter-spacing: .3px; }
+.bar__sub { color: var(--muted); font-size: 12px; margin-right: auto; }
+
+.bar__btn {
+  border: 1px solid var(--line);
+  background: var(--panel-soft);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.bar__btn:hover { border-color: var(--brand); color: #cfe0ff; }
+.bar__btn:disabled { opacity: .5; cursor: progress; }
+
+.stage {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #131a24, #0f151d);
+  padding: 14px 14px 16px;
+  overflow: hidden;
+}
+
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: auto -30% -60% -30%;
+  height: 120px;
+  background: radial-gradient(closest-side, #4d8dff33, transparent);
+}
+
+.pet { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
+
+.pet__art {
+  width: 104px;
+  height: 104px;
+  flex: none;
+  animation: bob 3.4s ease-in-out infinite;
+}
+
+.pet__torso { fill: url(#bodyGrad); }
+.pet__shadow { fill: #00000055; animation: shadow 3.4s ease-in-out infinite; }
+.pet__eye { fill: #10202b; animation: blink 4.6s infinite; transform-origin: center; }
+.pet__glint { fill: #ffffffcc; }
+.pet__cheek { fill: #ff7a9c66; }
+.pet__mouth { fill: none; stroke: #10202b; stroke-width: 2.6; stroke-linecap: round; }
+.pet__brow { fill: none; stroke: #10202b99; stroke-width: 2.4; stroke-linecap: round; }
+
+.pet__prop { opacity: 0; transform: translateY(4px); transition: opacity .25s, transform .25s; }
+.pet__prop rect { fill: #f0b429; }
+.pet__prop text { fill: #3b2a00; font: 700 10px "Segoe UI", sans-serif; }
+
+.pet[data-mood="happy"] .pet__prop { opacity: 1; transform: translateY(0); }
+.pet[data-mood="happy"] .pet__brow { stroke: #10202b66; }
+.pet[data-mood="worried"] .pet__brow { transform: translateY(3px); stroke: #10202bcc; }
+.pet[data-mood="worried"] .pet__cheek { opacity: 0; }
+
+.bubble {
+  position: relative;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  color: #cfd8e3;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.bubble::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  background: var(--panel-soft);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transform: rotate(45deg);
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  padding: 12px 14px;
+}
+
+.card__head { display: flex; align-items: center; gap: 10px; }
+.card__title { margin: 0 0 10px; font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: .4px; }
+.card__note { margin: 10px 0 0; font-size: 12px; color: var(--muted); }
+.card__foot { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.muted { color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  background: #3fd0a01f;
+  color: var(--good);
+  border: 1px solid #3fd0a040;
+}
+
+.card--period[data-state="standard"] .badge { background: #4d8dff1f; color: #8ab4ff; border-color: #4d8dff40; }
+.card--period[data-state="unknown"] .badge { background: #ffffff0f; color: var(--muted); border-color: var(--line); }
+
+.bar-track { height: 6px; border-radius: 999px; background: #ffffff12; margin-top: 12px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--good), #7be6c2); transition: width .5s linear; }
+.card--period[data-state="standard"] .bar-fill { background: linear-gradient(90deg, var(--brand), #8ab4ff); }
+
+.amount { display: flex; align-items: baseline; gap: 6px; }
+.amount__num { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.amount__cur { color: var(--muted); font-size: 13px; }
+.card--balance[data-state="error"] .amount__num { color: var(--bad); font-size: 18px; }
+
+.kv { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.kv li { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--muted); }
+.kv b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+
+.foot { text-align: center; font-size: 11.5px; color: #6b7787; padding: 2px 6px; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes shadow {
+  0%, 100% { transform: scaleX(1); opacity: .5; }
+  50% { transform: scaleX(.86); opacity: .35; }
+}
+
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet__art, .pet__shadow, .pet__eye { animation: none; }
+}
